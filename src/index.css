@@ -21,6 +21,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -40,8 +41,33 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 6em;
   line-height: 1.1;
+  font-family:'Shadows Into Light';
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 1.5em;
+}
+
+.hero-container {
+  width: 100%;
+  height: auto;
+  margin-top: 100px;
+}
+
+.btn {
+  display: inline-block;
+  width: 200px;
+  font-weight: bold;
+  padding: 10px;
+  color: #fff;
+  border: 4px solid #fff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  
 }
 
 button {

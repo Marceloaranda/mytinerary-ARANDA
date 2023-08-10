@@ -1,6 +1,6 @@
+import { Link as Anchor } from 'react-router-dom'
 
-
-export default function Header() {
+export default function Navbar() {
   return (
     <header>
         <nav className="navbar navbar-expand-lg ">
@@ -10,9 +10,9 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
               <div className="navbar-nav ">  
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
-                <a className="nav-link" href="#">Cities</a>
-                <button className="btn btn-outline-success" type="submit">Login</button>
+                <Anchor to='/' className="nav-link active">Home</Anchor>
+                <Anchor to="/cities" className="nav-link">Cities</Anchor>
+                <button className="btn-outline-success" type="submit">Login</button>
               </div>
             </div>
           </div>
