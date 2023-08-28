@@ -18,7 +18,8 @@ export default function Cities() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.current.value) {
-      const queryParams = "?name"+input.current.value;
+      const queryParams = "?city="+input.current.value;
+      console.log(queryParams)
       getCities(queryParams)
         .then((res) => setCities(res))
         .catch((err) => console.log(err));
@@ -29,15 +30,18 @@ export default function Cities() {
   }
   return (
     
-    <section className="container d-flex flex-wrap gap-5 justify-content-center justify-content-md between">
-      <form className="d-flex gap-5 col-10" onSubmit={handleSubmit}>
-        <input type="text" ref={input} />
-        <button className="btn btn-secondary">Search</button>
+    <section className="container d-flex flex-wrap gap-4 justify-content-center justify-content-md between">
+      <form className="d-flex gap-4 col-90" onSubmit={handleSubmit}>
+        <input className="form-control" type="text" ref={input} />
+        <button className="btn ">Search Cities</button>
       </form>
       <h2 className= "text-center w-100 text-primary">Cities</h2>
-      {cities.map((city) => (
-        <CityCard key={city._id} city={city} />
-      ))}
+      {cities.length > 0 ? (
+        cities.map((city) => 
+        <CityCard key={city._id} city={city} />)
+        ) : (
+          <h2> No results!!</h2>
+      )}
     </section>
     
   )

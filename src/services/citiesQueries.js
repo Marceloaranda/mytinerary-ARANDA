@@ -5,9 +5,10 @@ const cities = axios.create({
 })
 
 
-export const getCities = async ( queryParams ) => {
+export const getCities = async ( queryParams="" ) => {
+    console.log("estoy en querys", queryParams)
     try {
-        const {data} = await cities("/api/city"+queryParams)
+        const {data} = await cities("/api/city/"+queryParams)
         return data
 
     } catch (err) {
