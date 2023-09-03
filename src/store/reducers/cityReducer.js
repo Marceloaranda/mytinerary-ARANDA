@@ -13,7 +13,10 @@ const citiesReducer = createReducer(initialState, (builder)=> {
         const newState = {...state, cities: action.payload.cities}
         return newState
     })
+    .addCase(cityActions.allCitiesAsync.fulfilled, (state, action)=>{
+        const newState = {...state, cities: action.payload}
+        return newState
+    })
 
 })
-
 export default citiesReducer

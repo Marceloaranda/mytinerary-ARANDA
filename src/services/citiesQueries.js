@@ -6,7 +6,7 @@ const cities = axios.create({
 
 
 export const getCities = async ( queryParams="" ) => {
-    console.log("estoy en querys", queryParams)
+   // console.log("estoy en querys", queryParams)
     try {
         const {data} = await cities("/api/city/"+queryParams)
         return data

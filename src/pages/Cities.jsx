@@ -1,37 +1,40 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useRef } from "react"
 import CityCard from "../components/CityCard"
-import { getCities } from "../services/citiesQueries"
+
 import { useSelector, useDispatch } from "react-redux";
 import cityActions from "../store/actions/cityActions";
 
 
 export default function Cities() {
  // const [cities, setCities] = useState([]);
-  const [allCities, setAllCities] = useState([]);
+ // const [allCities, setAllCities] = useState([]);
   const input = useRef(null);
 
   let citiesInStore = useSelector(store => store.citiesReducer.cities)
-  console.log(citiesInStore)
+ // console.log(citiesInStore)
 
   const dispatch = useDispatch()
 
 
-
-
   useEffect(() => {
-    getCities()
+  /*  getCities()
       .then((data) => {
        // setCities(data),
         dispatch(cityActions.add_cities(data))
        setAllCities(data);
       })
       .catch((err) => console.log(err))
-  }, [])
+      */
+     dispatch(cityActions.allCitiesAsync())
+
+  }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.current.value) {
       const queryParams = "?city="+input.current.value;
+
+      /*
       console.log(queryParams)
       getCities(queryParams)
         .then((res) => {
@@ -39,10 +42,13 @@ export default function Cities() {
         dispatch(cityActions.add_cities(res))
         })
         .catch((err) => console.log(err));
+*/
+dispatch(cityActions.allCitiesAsync(queryParams));
+
     } else {
       // setCities(allCities);
-      dispatch(cityActions.add_cities(allCities))
-
+      // dispatch(cityActions.add_cities(allCities))
+      dispatch(cityActions.allCitiesAsync())
     }
     
   }
