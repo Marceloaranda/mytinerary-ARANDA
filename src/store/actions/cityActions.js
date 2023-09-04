@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCities } from "../../services/citiesQueries";
+import { getCities, getOneCity } from "../../services/citiesQueries";
 
 const add_cities = createAction('add_cities', (array)=>{
     return {
@@ -14,12 +14,17 @@ const allCitiesAsync = createAsyncThunk('all_cities_async', async(query)=>{
         const data = await getCities(query)
         return data
 
-    }catch(e) {
-        console.log(e);
+    }catch(err) {
+        console.log(err);
     }
+})
+
+const detailCity =createAsyncThunk('detail_city', async(id)=>{
+        const data = await getOneCity(id)
+        return data
 })
 
 
 
-const cityActions = {add_cities, allCitiesAsync}
+const cityActions = {add_cities, allCitiesAsync, detailCity}
 export default cityActions

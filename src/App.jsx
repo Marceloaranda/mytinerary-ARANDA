@@ -9,21 +9,17 @@ import Details from './pages/Details'
 const router = createBrowserRouter([
   { path: '/', element: <Layout />,
     children: [
-      { path: '/', element: <Home />}
-    ]
+      { path: '/', element: <Home />},
+    
+  
+      { path: '/cities', element: <Cities />},
+    
+  
+      { path: '/details/:id', element: <Details />},
+    ],
   },
-  { path: '/Cities', element: <Layout />,
-    children: [
-      { path: '/Cities', element: <Cities />},
-    ] 
-  },
-  { path: '/details', element: <Layout />,
-    children: [
-      { path: '/details', element: <Details />},
-    ] 
-  }
 
-])
+]);
 
 function App() {
 

@@ -15,6 +15,17 @@ export const getCities = async ( queryParams="" ) => {
         return []
     }
 
+}
 
+export const getOneCity = async ( id ) => {
+    try {
+        const {data} = await cities("/api/city/"+id)
+       // console.log("estoy en querys", data)
+        return data
+
+    } catch (err) {
+        return {}
+    }
 
 }
+

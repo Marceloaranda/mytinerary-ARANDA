@@ -1,4 +1,4 @@
-import { Link as Anchor} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function CityCard({ city }) {
   return (
@@ -9,7 +9,10 @@ export default function CityCard({ city }) {
             <div className="card-body justify-between w-10">
                 <h5 className="card-title bg-secondary bg-gradient badge fs-5" >{city.city}</h5>
                 <div className="card-actions text-cyan-500">
-                    <Anchor to='/details'>Details </Anchor>
+                    <Link className='btn btn-secondary' to={`/details/${city._id}`}>
+                        Details
+                    </Link>
+
                 </div>    
             </div>            
         </div>
