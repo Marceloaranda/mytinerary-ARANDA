@@ -45,6 +45,13 @@
   padding: 2em;
   width: 30rem;
 }
+.card.detail{
+  padding: 1em;
+  width: 60%;
+  height: 100%;
+}
+
+
 
 .read-the-docs {
   color: #888;

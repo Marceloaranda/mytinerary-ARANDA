@@ -24,11 +24,11 @@ export default function Details() {
     <>
     {cityStore ? (
         
-        <div className="card mb-3" >
-        <div className="row g-0">
+        <div className="card detail mb-3" >
+        <div className="row g-5">
             <div className= "col-md-4">
           <figure>
-            <img className= "img-fluid rounded-start" src={cityStore.image} alt={cityStore.city} />
+            <img className= "img-fluid rounded-start" width="300" height="150" src={cityStore.image} alt={cityStore.city} />
           </figure>
           </div>
           <div className="col-md-8">

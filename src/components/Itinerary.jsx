@@ -6,19 +6,19 @@ export default function Itinerary({ itinerary }) {
       <div >
         <h2 className="card-text">{itinerary.title}</h2>
        
-        
       </div>
       <div>
         <div className="row g-0">
           <div className="container d-flex justify-content-center">
             <figure>
               <img
-                className="card w-10  bg-transparent border-0"
+                className="figure-img img-fluid rounded" width="100" height="80"
                 src={itinerary.profilePhoto}
                 alt={itinerary.title}
               />
+              <figcaption className="figure-caption">{itinerary.authorName}</figcaption>
             </figure>
-            <p className="font-bold">{itinerary.authorName}</p>
+            
           </div>
           <div className="flex flex-row">
             <div className="self-center">
