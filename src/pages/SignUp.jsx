@@ -43,52 +43,36 @@ const SignUp = () => {
 
   return (
     <section className="d-flex justify-content-center">
-        <div className="card col-sm-p p-3">
-            <div className="mb-3">
+        <div className="card col-sm-4 p-2">
+            <div className="mb-1" >
                 <h4>Sign Up</h4>
             </div>
-            <div className="mb-2">
+            <div className="mb-1 " >
                 <form onSubmit= { handleSubmit }>
-                    <div className="mb-2">
-                        <label>
-                            {" "}
-                            FirstName:
-                        <input type="text" name="firstname" ref={firstName}></input>
-                        </label>
+                    <div className="mb-2 ">
+                        <label className= "form-label  d-flex flex-colum">FirstName:</label>
+                        <input type="text" className= "form-control" name="firstname" ref={firstName}></input>
                     </div>
                     <div className="mb-2">
-                        <label>
-                            {" "}
-                            LastName:
-                        <input type="text" name="lastname" ref={lastName}></input>
-                        </label>
+                        <label className= "form-label  d-flex flex-colum">LastName:</label>
+                        <input type="text" className= "form-control" name="lastname" ref={lastName}></input>
                     </div>
                     <div className="mb-2">
-                        <label>
-                            {" "}
-                            email:
-                        <input type="email" name="email" ref={email}></input>
-                        </label>
+                        <label className= "form-label  d-flex flex-colum">email:</label>
+                        <input type="email" className= "form-control" name="email" ref={email}></input>
                     </div>
                     <div className="mb-2">
-                        <label>
-                            {" "}
-                            Password:
-                        <input type="password" name="password" ref={password}></input>
-                        </label>
+                        <label className= "form-label  d-flex flex-colum">Password:</label>
+                        <input type="password" className= "form-control" name="password" ref={password}></input>
                     </div>
                     <div className="mb-2">
-                        <label>
-                            {" "}
-                            Image:
-                        <input type="text" name="image" ref={imageUrl}></input>
-                        </label>
+                        <label className= "form-label  d-flex flex-colum">Image:</label>
+                        <input type="text" className= "form-control" name="image" ref={imageUrl}></input>
                     </div>
                     <div className="mb-2">
-                        <label>
-                            {" "}
-                            Country
-                            <select name="country" ref={country}>
+                        <label className= "form-label  d-flex flex-colum">
+                            Country:
+                            <select className= "form-control" name="country" ref={country}>
                                 {countries.length > 0 &&
                                 countries.map((country) => (
                                     <option key={`aot-country-${country}`} value={country}>{country}</option>
