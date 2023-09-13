@@ -1,11 +1,22 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useRef } from "react";
+import { signUp } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 
 const SignUp = () => {
 
     const [countries, setCountries] = useState([]);
+
+    const dispatch = useDispatch()
+
+    const firstName = useRef(null)
+    const lastName = useRef(null)
+    const email = useRef(null)
+    const password = useRef(null)
+    const imageUrl = useRef(null)
+    const country = useRef(null)
+
     useEffect(() => {
         axios("https://restcountries.com/v3.1/all?fields=name").then(({data}) => 
         setCountries(data.map((country) => country.name.common))
@@ -14,6 +25,20 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const aux = [firstName, lastName, email, password, imageUrl, country];
+        if (aux.some((item) => !item.current.value)) {
+            alert("All fields are required")
+        }else {
+            const body = {
+                firstName : firstName.current.value,
+                lastName : lastName.current.value,
+                email : email.current.value,
+                password : password.current.value,
+                imageUrl : imageUrl.current.value,
+                country : country.current.value
+            }
+            dispatch( signUp( body ) )
+        }
     }
 
   return (
@@ -28,42 +53,42 @@ const SignUp = () => {
                         <label>
                             {" "}
                             FirstName:
-                        <input type="text" name="firstname"></input>
+                        <input type="text" name="firstname" ref={firstName}></input>
                         </label>
                     </div>
                     <div className="mb-2">
                         <label>
                             {" "}
                             LastName:
-                        <input type="text" name="lastname"></input>
+                        <input type="text" name="lastname" ref={lastName}></input>
                         </label>
                     </div>
                     <div className="mb-2">
                         <label>
                             {" "}
                             email:
-                        <input type="email" name="email"></input>
+                        <input type="email" name="email" ref={email}></input>
                         </label>
                     </div>
                     <div className="mb-2">
                         <label>
                             {" "}
                             Password:
-                        <input type="password" name="password"></input>
+                        <input type="password" name="password" ref={password}></input>
                         </label>
                     </div>
                     <div className="mb-2">
                         <label>
                             {" "}
                             Image:
-                        <input type="text" name="image"></input>
+                        <input type="text" name="image" ref={imageUrl}></input>
                         </label>
                     </div>
                     <div className="mb-2">
                         <label>
                             {" "}
                             Country
-                            <select name="country">
+                            <select name="country" ref={country}>
                                 {countries.length > 0 &&
                                 countries.map((country) => (
                                     <option key={`aot-country-${country}`} value={country}>{country}</option>
