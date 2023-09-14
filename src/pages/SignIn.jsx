@@ -1,7 +1,9 @@
+import { GoogleLogin } from "@react-oauth/google";
 import { signIn } from "../store/actions/userActions"
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const SignIn = () => {
 
@@ -29,6 +31,21 @@ const SignIn = () => {
     })
     }
   }
+
+const signInWithGoogle = (credentialResponse) => {
+  const dataUser = jwtDecode(credentialResponse.credential)
+  const body = {
+    email : dataUser.email,
+    password : dataUser.given_name + dataUser.family_name
+  }
+  dispatch( signIn( body ) ).then((response) => {
+    //console.log(response)
+    if (response.payload.success) {
+      navigate('/');
+    }
+    }).catch( err => console.log(err) );
+}
+
   return (
     <section className="d-flex justify-content-center">
         <div className="card col-sm-4 p-2">
@@ -48,6 +65,12 @@ const SignIn = () => {
                     </div>
                     
                     <button className="btn btn-secondary">Sign In</button>
+                    <GoogleLogin 
+                        text="signin_with"
+                        onSuccess={signInWithGoogle}
+                        onError={() => {
+                        console.log('Login Failed');
+                        }}/>
                 </form>
 
             </div>

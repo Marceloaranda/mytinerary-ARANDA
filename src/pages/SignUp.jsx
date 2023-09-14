@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { signUp } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
-
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 const SignUp = () => {
 
@@ -40,6 +41,23 @@ const SignUp = () => {
             dispatch( signUp( body ) )
         }
     }
+
+    const signUpWithGoogle = (credentialResponse) => {
+        
+        const dataUser = jwtDecode(credentialResponse.credential)
+        
+        const body = {
+            firstName : dataUser.given_name,
+            lastName : dataUser.family_name,
+            email : dataUser.email,
+            password : dataUser.given_name + dataUser.family_name,
+            imageUrl : dataUser.picture  
+        }
+        dispatch( signUp( body ) )
+    }
+
+
+
 
   return (
     <section className="d-flex justify-content-center">
@@ -81,6 +99,12 @@ const SignUp = () => {
                         </label>
                     </div>
                     <button className="btn btn-secondary">Sign Up</button>
+                    <GoogleLogin 
+                        text="signup_with"
+                        onSuccess={signUpWithGoogle}
+                        onError={() => {
+                        console.log('Login Failed');
+                        }}/>
                 </form>
 
             </div>
