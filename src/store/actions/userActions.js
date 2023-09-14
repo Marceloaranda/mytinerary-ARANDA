@@ -21,8 +21,8 @@ export const signIn = createAsyncThunk ("login", async(body) => {
     try {
         const response = await axios.post('http://localhost:3000/api/user/login', body)
         localStorage.setItem('token', response.data.token);
-        console.log(response.data.user)
-        return response.data.user
+        //console.log(response.data.user)
+        return response.data
     } catch (error) {
         console.log(error)
     }
@@ -43,4 +43,9 @@ export const authenticated = createAsyncThunk ("login_token", async() => {
     } catch (error) {
         console.log(error)
     }
+})
+
+export const logout = createAction("reset", () => {
+    localStorage.removeItem('token')
+    return {payload : null}
 })

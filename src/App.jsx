@@ -7,6 +7,9 @@ import Cities from './pages/Cities'
 import Details from './pages/Details'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { authenticated } from './store/actions/userActions'
 
 const router = createBrowserRouter([
   { path: '/', element: <Layout />,
@@ -26,6 +29,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect( () => { 
+    const token = localStorage.getItem('token')
+    if(token) {
+      dispatch(authenticated())
+     }
+    }, [])
+
 
   return (
     <>

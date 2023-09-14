@@ -1,6 +1,7 @@
 import { signIn } from "../store/actions/userActions"
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
 
@@ -8,7 +9,7 @@ const SignIn = () => {
   const password = useRef(null)
 
   const dispatch = useDispatch()
-  
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     const aux = [email, password];
@@ -19,10 +20,15 @@ const SignIn = () => {
             email : email.current.value,
             password : password.current.value,
         }
-        dispatch( signIn( body ) )
+        dispatch( signIn( body ) ).then((response) => {
+          //console.log(response)
+          if (response.payload.success) {
+            alert("Welcome  " + response.payload.user.email)
+            navigate('/');
+        }
+    })
     }
-}
-
+  }
   return (
     <section className="d-flex justify-content-center">
         <div className="card col-sm-4 p-2">
