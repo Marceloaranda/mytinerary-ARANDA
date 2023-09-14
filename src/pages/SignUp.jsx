@@ -4,13 +4,15 @@ import { signUp } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
     const [countries, setCountries] = useState([]);
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const firstName = useRef(null)
     const lastName = useRef(null)
     const email = useRef(null)
@@ -28,7 +30,12 @@ const SignUp = () => {
         e.preventDefault();
         const aux = [firstName, lastName, email, password, imageUrl, country];
         if (aux.some((item) => !item.current.value)) {
-            alert("All fields are required")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'All fields are required',
+              })
+           // alert("All fields are required")
         }else {
             const body = {
                 firstName : firstName.current.value,
@@ -38,7 +45,13 @@ const SignUp = () => {
                 imageUrl : imageUrl.current.value,
                 country : country.current.value
             }
-            dispatch( signUp( body ) )
+            dispatch( signUp( body ) ).then((response) => {
+                //console.log(response)
+                if (response.payload.success) {
+                  
+                  navigate('/');
+              }
+          })
         }
     }
 
@@ -53,7 +66,13 @@ const SignUp = () => {
             password : dataUser.given_name + dataUser.family_name,
             imageUrl : dataUser.picture  
         }
-        dispatch( signUp( body ) )
+        dispatch( signUp( body ) ).then((response) => {
+            //console.log(response)
+            if (response.payload.success) {
+              
+              navigate('/');
+          }
+      })
     }
 
 
@@ -98,13 +117,26 @@ const SignUp = () => {
                         </select>
                         </label>
                     </div>
+
+                    <div>
+                    <p>If you already have an account,  <b> log in! </b> </p>
+                    </div>
+
                     <button className="btn btn-secondary">Sign Up</button>
+
+                    <div>
+                    <p><b> or </b> </p>
+                    </div>
+                    <div className="d-flex justify-content-center">
+
                     <GoogleLogin 
                         text="signup_with"
                         onSuccess={signUpWithGoogle}
                         onError={() => {
                         console.log('Login Failed');
                         }}/>
+                    </div>
+
                 </form>
 
             </div>
